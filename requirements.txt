@@ -1,4 +1,5 @@
-gymnasium
+gymnasium[classic-control]
+gymnasium[box2d]
 jax
 ipython
 ipykernel

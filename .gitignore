@@ -1,4 +1,3 @@
 /.venv
-/CartPole-v1.pt
-/LunarLander-v2.pt
+*.pt
 /__pycache__
