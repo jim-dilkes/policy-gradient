@@ -1,0 +1,6 @@
+gymnasium
+jax
+ipython
+ipykernel
+dm-haiku
+torch
