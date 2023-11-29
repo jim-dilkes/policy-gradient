@@ -3,21 +3,22 @@ import torch
 from torch import nn
 
 class PyTorchWrapper(gym.Wrapper):
-    def __init__(self, env):
+    def __init__(self, env, device):
         super().__init__(env)
+        self.device = device
 
     def reset(self, **kwargs):
         observation, info = self.env.reset(**kwargs)
-        return torch.from_numpy(observation).float(), info
+        return torch.from_numpy(observation).float().to(self.device), info
 
     def step(self, action):
         observation, reward, terminated, truncated, info = self.env.step(action)
-        observation = torch.from_numpy(observation).float()
+        observation = torch.from_numpy(observation).float().to(self.device)
         return observation, reward, terminated, truncated, info
 
 
 class MultiLayerModel(nn.Module):
-    def __init__(self, n_env_inputs, n_action_space, n_per_hidden=[128, 64], activation=nn.ReLU, output_activation=nn.Softmax):
+    def __init__(self, n_env_inputs, n_action_space, n_per_hidden, activation=nn.ReLU, output_activation=nn.Softmax):
         super().__init__()
         n_per_hidden = [n_per_hidden] if type(n_per_hidden) != list else n_per_hidden
         
