@@ -5,3 +5,4 @@ ipython
 ipykernel
 dm-haiku
 torch
+matplotlib
